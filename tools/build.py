@@ -83,6 +83,7 @@ doc = f"""<!doctype html>
 <link rel="apple-touch-icon" href="assets/img/favicon-192.png">
 <link rel="stylesheet" href="assets/fonts.css?v={V}">
 <link rel="stylesheet" href="assets/hub.css?v={V}">
+<link rel="stylesheet" href="assets/pages.css?v=20261108a">
 </head>
 <body>
 <header class="ix-hero">
@@ -100,6 +101,7 @@ doc = f"""<!doctype html>
         <div><dt>Other HTML</dt><dd>{n_other}</dd></div>
       </dl>
     </div>
+    <nav class="pg-nav" aria-label="Hub pages"><a href="./" aria-current="page">All websites &amp; pages</a><a href="pipeline.html">How it works (pipeline)</a><a href="links.html">Every link</a></nav>
   </div>
 </header>
 <main class="ix-wrap">
