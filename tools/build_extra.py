@@ -54,10 +54,10 @@ def pipeline():
          node('Facts + brand check', 'TRE&trade; never &reg;; contact bonjour@bhdasia.com (hidden from bots); discount codes never shown; Simba = Living with the Spirit logo.', tags(('gate', 'rules')), 'is-gate'),
          node('Event page on all 3 sites', 'Newest page format copied. Card, home strip, search data (JSON-LD), chatbot, llms.txt, sitemap. TRE page built by <code>_src/build.py</code>.', S3),
          node('Test + push live', 'Rendered in Chrome: no errors, right dates, countdown. Pushed to all 3 sites; every new link checked live (200).', tags(('gate', 'live check')), 'is-gate')],
-        [node('Event kit (one command)', '<code>event_kit.py events/&lt;key&gt;.json --all</code> makes the 16:9 thumbnail, 4:5 poster with QR and 4 social posts, plus captions.', tags(('auto', 'automatic'))),
+        [node('Event kit (one command)', '<code>event_kit.py events/&lt;key&gt;.json --all</code> makes the 16:9 thumbnail and the 4:5 poster with QR (the proper branding), plus captions.', tags(('auto', 'automatic'))),
          node('Layout audit', 'Text fit, nothing under the footer, faces not covered, no hard cut-out edge. Contact sheet checked by eye.', tags(('gate', 'audit')), 'is-gate'),
          node('Drive delivery', '07. Event Images (auto) folders + My Drive &ldquo;&lt;Person&gt; Branding&rdquo; with running post numbers; md5-checked.', tags(('auto', 'automatic'))),
-         node('Posting schedule', '5 posts &ldquo;To set up&rdquo; before the next session: poster first, &ldquo;who it is for&rdquo; one week before. Schedule rules applied.', tags(('auto', 'automatic')))],
+         node('Posting schedule', '2 posts &ldquo;To set up&rdquo; before the next session: the poster to announce, then the poster again one week before. Schedule rules applied.', tags(('auto', 'automatic')))],
         [node('Coverage gate', '<code>event_coverage.py</code>: every upcoming event must have materials + a schedule. Runs automatically after every <code>git push</code>.', tags(('gate', 'hook')), 'is-gate'),
          node('Buffer (owner GO)', 'A dry run shows exactly what would be queued. Nothing goes to Buffer until the owner says GO.', tags(('', 'owner')), 'is-owner'),
          node('Live on social', 'Facebook, Instagram, LinkedIn at the planned times. TRE site also drafts a preview blog post for approval.', tags(('', 'published')))],
@@ -79,8 +79,8 @@ def pipeline():
         + ''.join(f'<dt>{k}</dt><dd>{v}</dd>' for k, v in rows) + '</dl></div>' for n, u, c, rows in sites) + '</div>'
     SK = [
         ('Claude skill', 'isabelle-new-event', 'The full new-event workflow: pages on all 3 sites, then the event kit and schedule, then the coverage gate. Triggers on any new event request.'),
-        ('Tool', 'event_kit.py', 'One command per event: thumbnail, poster, 4 social posts, captions, Drive delivery, 5 schedule rows, push + tracker refresh.'),
-        ('Tool', 'new_event.py · social.py', 'The site-card / poster renderer and the 4:5 social post design (HummingBeing card style, cut-out trainers, partner logos).'),
+        ('Tool', 'event_kit.py', 'One command per event: thumbnail, poster, captions, Drive delivery, 2 schedule rows (announce + reminder), push + tracker refresh.'),
+        ('Tool', 'new_event.py · poster.py', 'The site-card and 4:5 event poster renderer (HummingBeing card style, cut-out trainers, partner logos, QR).'),
         ('Gate + hook', 'event_coverage.py', 'Lists upcoming events on hummingbeing.com and fails if any has no materials or schedule. A Claude Code hook runs it after every git push.'),
         ('Tool', 'Schedule plan (fix.py · check.py · build.py)', 'Owner rules: next event daily, others weekends, max 2 a day (AM/PM). New events register in events_registry.json.'),
         ('Tool', 'swap_dates.py · patch.py', 'Change requests: dry-run sweeps across the 3 repos; in-place artwork date patches with a font-match self-check.'),
